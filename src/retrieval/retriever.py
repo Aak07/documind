@@ -1,50 +1,27 @@
 """
-Basic dense retrieval from Qdrant.
-This is the V1 retriever — we'll add hybrid search and reranking later.
+Main retriever — orchestrates hybrid search → reranking → top-k.
 """
 
 from typing import List, Dict, Any
-from qdrant_client import QdrantClient
 
 from src.config import settings
-from src.ingestion.embedder import embed_query
-
-
-def get_client() -> QdrantClient:
-    return QdrantClient(url=settings.qdrant_url)
+from src.retrieval.hybrid_search import hybrid_search
+from src.retrieval.reranker import rerank
 
 
 def retrieve(query: str, top_k: int = None) -> List[Dict[str, Any]]:
     """
-    Retrieve relevant documents for a query using dense vector search.
-
-    Returns a list of dicts with 'text', 'score', and 'metadata' keys.
+    Full retrieval pipeline:
+    1. Hybrid search (dense + BM25 with RRF fusion)
+    2. Cohere reranking
+    3. Return top-k most relevant documents
     """
-    top_k = top_k or settings.top_k
-    client = get_client()
+    top_k = top_k or settings.rerank_top_k  # Final top_k after reranking
 
-    # Embed the query
-    query_vector = embed_query(query)
+    # Step 1: Get candidates from hybrid search (fetch more than we need)
+    candidates = hybrid_search(query, top_k=settings.top_k)
 
-    # Search Qdrant
-    results = client.query_points(
-        collection_name=settings.qdrant_collection_name,
-        query=query_vector,
-        limit=top_k,
-        with_payload=True
-    ).points
+    # Step 2: Rerank candidates
+    reranked = rerank(query, candidates, top_k=top_k)
 
-    # Format results
-    documents = []
-    for result in results:
-        documents.append({
-            "text": result.payload.get("text", ""),
-            "score": result.score,
-            "metadata": {
-                "source": result.payload.get("source", ""),
-                "page": result.payload.get("page", ""),
-                "chunk_index": result.payload.get("chunk_index", ""),
-            },
-        })
-
-    return documents
+    return reranked

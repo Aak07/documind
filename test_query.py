@@ -4,7 +4,7 @@ from src.generation.graph import query
 
 if __name__ == "__main__":
     # Make sure you've ingested documents first!
-    result = query("Is the GAAP Operating Expense greater than 1 Million dollars?")
+    result = query("Did Nvidia launch Borderlands 4, and if so, what specific DLSS version was used")
 
     print("=" * 60)
     print("QUESTION:", result["question"])
