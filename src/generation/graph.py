@@ -86,9 +86,10 @@ def query(question: str) -> dict:
         "answer_is_useful": False,
         "route": "vectorstore",
         "retry_count": 0,
-        "max_retries": 2,
+        "max_retries": 1,
         "cost_usd": 0.0,
         "latency_ms": {},
+        "token_usage": {},
     }
 
     result = rag_chain.invoke(initial_state)
