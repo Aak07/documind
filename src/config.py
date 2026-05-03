@@ -3,8 +3,12 @@ Centralized configuration using pydantic-settings.
 All env vars are loaded here — no hardcoded keys anywhere else.
 """
 
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings
 from pydantic import Field
+import os
+
+# FIX: Set HuggingFace cache directory to avoid re-downloads
+os.environ["HF_HOME"] = os.path.join(os.path.expanduser("~"), ".cache", "huggingface")
 
 class Settings(BaseSettings):
     # LLM
@@ -37,12 +41,13 @@ class Settings(BaseSettings):
     langchain_api_key: str = Field(default="", env="LANGCHAIN_API_KEY")
     langchain_project: str = Field(default="documind", env="LANGCHAIN_PROJECT")
 
-    # This handles the .env loading automatically
-    model_config = SettingsConfigDict(
-        env_file=".env", 
-        env_file_encoding="utf-8",
-        extra="ignore" # Prevents errors if your .env has extra variables
-    )
+    # FIX: Pydantic V2 uses model_config dict, not inner Config class
+    model_config = {
+        "env_file": ".env",
+        "env_file_encoding": "utf-8",
+        "extra": "ignore", # Prevents errors if your .env has extra variables
+        "populate_by_name": True,
+    }
 
 # Singleton — import this everywhere
 settings = Settings()
