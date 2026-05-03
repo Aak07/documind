@@ -6,6 +6,7 @@ before falling back to character-level splits.
 
 from typing import List, Dict, Any
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_text_splitters import MarkdownTextSplitter
 from src.config import settings
 
 def create_chunks(
@@ -20,9 +21,14 @@ def create_chunks(
     chunk_size = chunk_size or settings.chunk_size
     chunk_overlap = chunk_overlap or settings.chunk_overlap
 
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
+    md_splitter = MarkdownTextSplitter(
+        chunk_size=settings.chunk_size, 
+        chunk_overlap=settings.chunk_overlap
+    )
+
+    fallback_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=settings.chunk_size, 
+        chunk_overlap=settings.chunk_overlap,
         separators=["\n\n", "\n", ". ", " ", ""],
         length_function=len,
     )
@@ -34,7 +40,10 @@ def create_chunks(
         metadata = doc["metadata"]
 
         # Split this document's text
-        splits = splitter.split_text(text)
+        if metadata.get("parsed by") == "llamaparse_markdown":
+            splits = md_splitter.split_text(text)
+        else:
+            splits = fallback_splitter.split_text(text)
 
         for i, chunk_text in enumerate(splits):
             all_chunks.append({

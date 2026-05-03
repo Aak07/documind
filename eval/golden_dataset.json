@@ -1,0 +1,152 @@
+[
+  {
+    "question": "What was the record revenue for the third quarter of fiscal 2026?",
+    "ground_truth": "The record revenue for the third quarter of fiscal 2026 was $57.0 billion.",
+    "context_keywords": ["revenue", "third quarter", "fiscal 2026", "$57.0 billion"]
+  },
+  {
+    "question": "According to the Q3 Fiscal 2026 Summary table, what was the GAAP operating income for Q3 FY26?",
+    "ground_truth": "The GAAP operating income for Q3 FY26 was $36,010 million (or $36.01 billion).",
+    "context_keywords": ["GAAP", "operating income", "Q3 FY26", "$36,010"]
+  },
+  {
+    "question": "What was the Non-GAAP diluted earnings per share for Q3 FY26?",
+    "ground_truth": "The Non-GAAP diluted earnings per share for Q3 FY26 was $1.30.",
+    "context_keywords": ["Non-GAAP", "diluted earnings per share", "Q3 FY26", "$1.30"]
+  },
+  {
+    "question": "What is the year-over-year (Y/Y) percentage increase in GAAP revenue for Q3 FY26 as stated in the summary table?",
+    "ground_truth": "The year-over-year (Y/Y) percentage increase in GAAP revenue for Q3 FY26 was 62%.",
+    "context_keywords": ["GAAP", "revenue", "Q3 FY26", "Y/Y", "62%"]
+  },
+  {
+    "question": "Calculate the difference in GAAP net income between Q3 FY26 and Q2 FY26.",
+    "ground_truth": "The difference in GAAP net income is $5,488 million ($31,910 million in Q3 FY26 minus $26,422 million in Q2 FY26).",
+    "context_keywords": ["GAAP", "net income", "Q3 FY26", "Q2 FY26", "$31,910", "$26,422"]
+  },
+  {
+    "question": "Who is the founder and CEO of NVIDIA?",
+    "ground_truth": "Jensen Huang is the founder and CEO of NVIDIA.",
+    "context_keywords": ["founder", "CEO", "NVIDIA", "Jensen Huang"]
+  },
+  {
+    "question": "What is the quarterly cash dividend per share NVIDIA will pay on December 26, 2025?",
+    "ground_truth": "NVIDIA will pay a quarterly cash dividend of $0.01 per share.",
+    "context_keywords": ["quarterly cash dividend", "December 26, 2025", "$0.01"]
+  },
+  {
+    "question": "What was the Data Center revenue in the third quarter of fiscal 2026?",
+    "ground_truth": "The Data Center revenue for the third quarter of fiscal 2026 was a record $51.2 billion.",
+    "context_keywords": ["Data Center revenue", "third quarter", "fiscal 2026", "$51.2 billion"]
+  },
+  {
+    "question": "What is NVIDIA's projected revenue from the professional visualization sector for fiscal year 2027?",
+    "ground_truth": "The provided documents do not contain information about projections for fiscal year 2027.",
+    "context_keywords": ["professional visualization", "revenue", "2027", "projected"]
+  },
+  {
+    "question": "Which NVIDIA product achieved the highest performance and best overall efficiency in the SemiAnalysis InferenceMAX benchmarks, as mentioned in the FY2026 report?",
+    "ground_truth": "NVIDIA Blackwell achieved the highest performance and best overall efficiency in the SemiAnalysis InferenceMAX benchmarks.",
+    "context_keywords": ["NVIDIA Blackwell", "SemiAnalysis InferenceMAX", "highest performance"]
+  },
+  {
+    "question": "With which company did NVIDIA announce a strategic partnership to deploy at least 10 gigawatts of NVIDIA systems for next-generation AI infrastructure?",
+    "ground_truth": "NVIDIA announced a strategic partnership with OpenAI.",
+    "context_keywords": ["partner", "10 gigawatts", "OpenAI", "strategic partnership"]
+  },
+  {
+    "question": "What were the GAAP operating expenses in Q3 FY25, according to the 'Q3 Fiscal 2026 Summary' table in the fiscal 2026 report?",
+    "ground_truth": "According to the 'Q3 Fiscal 2026 Summary' table, the GAAP operating expenses for Q3 FY25 were $4,287 million.",
+    "context_keywords": ["GAAP", "operating expenses", "Q3 FY25", "$4,287"]
+  },
+  {
+    "question": "What is the name of the new class of GPU purpose-built for massive-context processing unveiled in the fiscal 2026 report?",
+    "ground_truth": "The new GPU is the NVIDIA Rubin CPX.",
+    "context_keywords": ["GPU", "massive-context processing", "NVIDIA Rubin CPX"]
+  },
+  {
+    "question": "What was the Gaming revenue in the third quarter of fiscal 2026?",
+    "ground_truth": "The Gaming revenue for the third quarter of fiscal 2026 was $4.3 billion.",
+    "context_keywords": ["Gaming revenue", "third quarter", "fiscal 2026", "$4.3 billion"]
+  },
+  {
+    "question": "What was the record quarterly revenue for the third quarter of fiscal 2025?",
+    "ground_truth": "The record quarterly revenue for the third quarter of fiscal 2025 was $35.1 billion.",
+    "context_keywords": ["revenue", "third quarter", "fiscal 2025", "$35.1 billion"]
+  },
+  {
+    "question": "Based on the fiscal 2025 report, what was the GAAP Operating Income for Q3 FY25?",
+    "ground_truth": "The GAAP Operating Income for Q3 FY25 was $21,869 million.",
+    "context_keywords": ["GAAP", "Operating Income", "Q3 FY25", "$21,869"]
+  },
+  {
+    "question": "What were the Non-GAAP operating expenses for Q3 FY25?",
+    "ground_truth": "The Non-GAAP operating expenses for Q3 FY25 were $3,046 million.",
+    "context_keywords": ["Non-GAAP", "operating expenses", "Q3 FY25", "$3,046"]
+  },
+  {
+    "question": "What was the quarter-over-quarter (Q/Q) percentage increase in GAAP revenue for Q3 FY25?",
+    "ground_truth": "The quarter-over-quarter percentage increase in GAAP revenue for Q3 FY25 was 17%.",
+    "context_keywords": ["GAAP", "revenue", "Q3 FY25", "Q/Q", "17%"]
+  },
+  {
+    "question": "Calculate the difference in Non-GAAP net income between Q3 FY25 and Q2 FY25.",
+    "ground_truth": "The difference is $3,058 million ($20,010 million in Q3 FY25 minus $16,952 million in Q2 FY25).",
+    "context_keywords": ["Non-GAAP", "net income", "Q3 FY25", "Q2 FY25", "$20,010", "$16,952"]
+  },
+  {
+    "question": "What was the Data Center revenue for the third quarter of fiscal 2025?",
+    "ground_truth": "The Data Center revenue for the third quarter of fiscal 2025 was a record $30.8 billion.",
+    "context_keywords": ["Data Center revenue", "third quarter", "fiscal 2025", "$30.8 billion"]
+  },
+  {
+    "question": "Describe Denmark's largest sovereign AI supercomputer as detailed in the Q3 fiscal 2025 report.",
+    "ground_truth": "It is an NVIDIA® DGX SuperPOD™ driven by 1,528 NVIDIA H100 Tensor Core GPUs and interconnected using NVIDIA Quantum-2 InfiniBand networking.",
+    "context_keywords": ["Denmark", "supercomputer", "DGX SuperPOD", "H100", "Quantum-2 InfiniBand"]
+  },
+  {
+    "question": "Did NVIDIA announce a new gaming console in the Q3 fiscal 2025 report?",
+    "ground_truth": "No, there is no mention of a new gaming console in the Q3 fiscal 2025 report.",
+    "context_keywords": ["gaming console", "fiscal 2025"]
+  },
+  {
+    "question": "What was the absolute dollar increase in Data Center revenue from Q3 FY25 to Q3 FY26?",
+    "ground_truth": "The Data Center revenue increased by $20.4 billion, from $30.8 billion in Q3 FY25 to $51.2 billion in Q3 FY26.",
+    "context_keywords": ["Data Center revenue", "increase", "Q3 FY25", "Q3 FY26", "$30.8 billion", "$51.2 billion"]
+  },
+  {
+    "question": "By what percentage did NVIDIA's Gaming revenue change from Q3 FY25 to Q3 FY26?",
+    "ground_truth": "NVIDIA's Gaming revenue increased by approximately 30.3%, growing from $3.3 billion in Q3 FY25 to $4.3 billion in Q3 FY26.",
+    "context_keywords": ["Gaming revenue", "percentage change", "Q3 FY25", "Q3 FY26", "$3.3 billion", "$4.3 billion"]
+  },
+  {
+    "question": "Compare the GAAP gross margin for Q3 FY26 with the GAAP gross margin for Q3 FY25, and note the difference in percentage points.",
+    "ground_truth": "The GAAP gross margin was 73.4% in Q3 FY26 compared to 74.6% in Q3 FY25, representing a decrease of 1.2 percentage points.",
+    "context_keywords": ["GAAP gross margin", "compare", "Q3 FY26", "Q3 FY25", "73.4%", "74.6%"]
+  },
+  {
+    "question": "What was the revenue outlook provided for the fourth quarter of fiscal 2025 versus the fourth quarter of fiscal 2026?",
+    "ground_truth": "The revenue outlook for Q4 FY25 was $37.5 billion (plus or minus 2%), while the outlook for Q4 FY26 was $65.0 billion (plus or minus 2%).",
+    "context_keywords": ["revenue outlook", "Q4 FY25", "Q4 FY26", "$37.5 billion", "$65.0 billion"]
+  },
+  {
+    "question": "From the 'Q3 Fiscal 2026 Summary' table, list the GAAP Net Income values for Q3 FY26, Q2 FY26, and Q3 FY25.",
+    "ground_truth": "From that specific table, the GAAP Net Income values are: Q3 FY26: $31,910 million; Q2 FY26: $26,422 million; Q3 FY25: $19,309 million.",
+    "context_keywords": ["GAAP Net Income", "Q3 Fiscal 2026 Summary", "Q3 FY26", "Q2 FY26", "Q3 FY25"]
+  },
+  {
+    "question": "What were the exact calendar dates for the end of the third quarter in fiscal 2026 and fiscal 2025?",
+    "ground_truth": "The third quarter of fiscal 2026 ended on October 26, 2025, and the third quarter of fiscal 2025 ended on October 27, 2024.",
+    "context_keywords": ["end of third quarter", "fiscal 2026", "fiscal 2025", "October 26, 2025", "October 27, 2024"]
+  },
+  {
+    "question": "Do these press releases contain any financial results or market share data for NVIDIA's competitors, such as AMD or Intel?",
+    "ground_truth": "No, the provided documents focus exclusively on NVIDIA's financial performance and do not contain financial results or market share data for competitors like AMD or Intel.",
+    "context_keywords": ["competitors", "AMD", "Intel", "market share"]
+  },
+  {
+    "question": "Using the 'RECONCILIATION OF GAAP TO NON-GAAP FINANCIAL MEASURES' table in the fiscal 2026 report, what is the value for Non-GAAP gross profit for the three months ended October 26, 2025?",
+    "ground_truth": "The Non-GAAP gross profit for the three months ended October 26, 2025 (Q3 FY26) was $41,967 million.",
+    "context_keywords": ["Non-GAAP gross profit", "reconciliation", "October 26, 2025", "$41,967 million"]
+  }
+]

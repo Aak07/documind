@@ -21,3 +21,4 @@ pytest-asyncio
 httpx
 tiktoken
 tenacity
+structlog

@@ -4,8 +4,10 @@ Uses a factory pattern — add new formats by adding a loader function.
 """
 
 import os
+from src.config import settings
 from pathlib import Path
 from typing import List, Dict, Any
+from llama_parse import LlamaParse
 import fitz # PyMuPDF
 
 def load_pdf(file_path: str) -> List[Dict[str, Any]]:
@@ -44,9 +46,36 @@ def load_txt(file_path: str) -> List[Dict[str, Any]]:
     }
     }]
 
+def load_pdf_markdown(file_path: str) -> List[Dict[str, Any]]:
+    """Extract structural Markdown from PDF using LlamaParse."""
+    api_key = getattr(settings, 'llama_cloud_api_key', os.getenv("LLAMA_CLOUD_API_KEY"))
+    
+    if not api_key:
+        print("WARNING: No LlamaParse API Key. Falling back to PyMuPDF.")
+        return load_pdf(file_path)
+
+    try:
+        print(f"Parsing file with LlamaParse...")
+        parser = LlamaParse(api_key=api_key, result_type="markdown", verbose=False)
+        parsed_docs = parser.load_data(file_path)
+        
+        # Merge pages into a single structural markdown string
+        full_text = "\n\n".join([doc.text for doc in parsed_docs if hasattr(doc, 'text')])
+        
+        return[{
+            "text": full_text.strip(),
+            "metadata": {
+                "source": os.path.basename(file_path),
+                "parsed_by": "llamaparse_markdown"
+            }
+        }]
+    except Exception as e:
+        print(f"ERROR: LlamaParse failed ({e}). Falling back to PyMuPDF.")
+        return load_pdf(file_path)
+
 # Factory: maps file extension to loader function
 LOADERS = {
-".pdf": load_pdf,
+".pdf": load_pdf_markdown,
 ".txt": load_txt,
 }
 
