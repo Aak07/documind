@@ -3,7 +3,7 @@ State schema for the LangGraph RAG workflow.
 Every node reads from and writes to this state.
 """
 
-from typing import TypedDict, List, Dict, Any, Optional
+from typing import TypedDict, List, Dict, Any
 
 
 class GraphState(TypedDict):
@@ -30,3 +30,4 @@ class GraphState(TypedDict):
     # Observability
     cost_usd: float
     latency_ms: Dict[str, float]
+    token_usage: Dict[str, Any]
