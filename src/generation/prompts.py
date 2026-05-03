@@ -31,19 +31,17 @@ QUESTION: {question}
 Respond with ONLY 'yes' or 'no':"""
 
 
-HALLUCINATION_GRADER_PROMPT = """You are a hallucination grader. Given a set of source documents and an AI-generated answer, determine if the answer is grounded in the source documents.
+HALLUCINATION_GRADER_PROMPT = """You are a factual grounding checker. Your job is to verify if the ANSWER below is supported by the SOURCE DOCUMENTS.
 
-Give a binary score: 'yes' or 'no'.
-'yes' means the answer is grounded in the documents (no hallucination).
-'no' means the answer contains information NOT found in the documents.
+An answer is "grounded" if the key claims in the answer can be found in or reasonably inferred from the source documents. Minor phrasing differences are acceptable — focus on factual accuracy.
 
 SOURCE DOCUMENTS:
 {documents}
 
-GENERATED ANSWER:
+ANSWER TO CHECK:
 {generation}
 
-Is the answer grounded in the documents? Respond with ONLY 'yes' or 'no':"""
+Is this answer grounded in the source documents? Reply with exactly one word: yes or no"""
 
 
 ANSWER_GRADER_PROMPT = """You are an answer quality grader. Given a question and an AI-generated answer, determine if the answer actually addresses the question.
