@@ -8,7 +8,7 @@ if __name__ == "__main__":
     print("Pre-warming embedding model...")
     warmup()
     
-    result = query("What were the exact calendar dates for the end of the third quarter in fiscal 2026 and fiscal 2025?")
+    result = query("Using the 'RECONCILIATION OF GAAP TO NON-GAAP FINANCIAL MEASURES' table in the fiscal 2026 report, what is the value for Non-GAAP gross profit for the three months ended October 26, 2025?")
     #Did Nvidia launch Borderlands 4, and if so, what specific DLSS version was used
 
     print("=" * 60)

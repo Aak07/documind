@@ -16,6 +16,11 @@ def run_benchmark():
 
     results = evaluate()
 
+    print("\n" + "=" * 40)
+    for metric, score in results.items():
+        print(f"  {metric}: {score:.4f}")
+    print("=" * 40)
+
     # Save results with timestamp
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_path = f"eval/eval_results/benchmark_{timestamp}.json"

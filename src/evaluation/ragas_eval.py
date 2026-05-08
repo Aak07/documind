@@ -5,13 +5,14 @@ Measures: faithfulness, answer relevancy, context precision, context recall.
 
 import json
 from typing import List, Dict
+import time
 from datasets import Dataset
 
 from src.generation.graph import query as rag_query
+from src.config import settings
 
 
 def load_golden_dataset(path: str = "eval/golden_dataset.json") -> List[Dict]:
-    """Load the golden Q&A dataset."""
     with open(path, "r") as f:
         return json.load(f)
 
@@ -27,7 +28,7 @@ def run_pipeline_on_dataset(dataset: List[Dict]) -> Dict[str, List]:
     ground_truths = []
 
     for i, item in enumerate(dataset):
-        print(f"Processing {i+1}/{len(dataset)}: {item['question'][:50]}...")
+        print(f"Processing {i+1}/{len(dataset)}: {item['question'][:60]}...")
 
         try:
             result = rag_query(item["question"])
@@ -43,6 +44,9 @@ def run_pipeline_on_dataset(dataset: List[Dict]) -> Dict[str, List]:
             answers.append("ERROR: Failed to generate answer")
             contexts.append([])
             ground_truths.append(item["ground_truth"])
+
+        # Respect Groq rate limits (free tier: 30 req/min)
+        time.sleep(7)
 
     return {
         "question": questions,
@@ -69,6 +73,18 @@ def evaluate(dataset_path: str = "eval/golden_dataset.json") -> Dict:
         context_precision,
         context_recall,
     )
+    from langchain_groq import ChatGroq
+    from langchain_huggingface import HuggingFaceEmbeddings
+
+    # RAGAS needs its own LLM — pass Groq explicitly
+    ragas_llm = ChatGroq(
+        model=settings.default_model,
+        api_key=settings.groq_api_key,
+        temperature=0,
+    )
+    ragas_embeddings = HuggingFaceEmbeddings(
+        model_name=settings.embedding_model,
+    )
 
     # Load golden dataset
     golden = load_golden_dataset(dataset_path)
@@ -91,19 +107,27 @@ def evaluate(dataset_path: str = "eval/golden_dataset.json") -> Dict:
             context_precision,
             context_recall,
         ],
+        llm=ragas_llm,
+        embeddings=ragas_embeddings,
     )
 
     # Print results
     print("\n" + "=" * 50)
     print("RAGAS EVALUATION RESULTS")
     print("=" * 50)
-    for metric, score in results.items():
+    '''for metric, score in results.items():
         if isinstance(score, float):
             print(f"  {metric}: {score:.4f}")
-    print("=" * 50)
+    print("=" * 50)'''
 
-    return dict(results)
+    scores_df = results.to_pandas()
+    metric_cols = ["faithfulness", "answer_relevancy", "context_precision", "context_recall"]
+    for col in metric_cols:
+        if col in scores_df.columns:
+            avg = scores_df[col].dropna().mean()
+            print(f"  {col}: {avg:.4f}")
 
+    return {col: scores_df[col].dropna().mean() for col in metric_cols if col in scores_df.columns}
 
 if __name__ == "__main__":
     evaluate()
