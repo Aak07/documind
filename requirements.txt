@@ -22,3 +22,4 @@ httpx
 tiktoken
 tenacity
 structlog
+python-multipart

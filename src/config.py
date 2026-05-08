@@ -13,8 +13,8 @@ os.environ["HF_HOME"] = os.path.join(os.path.expanduser("~"), ".cache", "hugging
 class Settings(BaseSettings):
     # LLM
     groq_api_key: str = Field(..., env="GROQ_API_KEY")
-    default_model: str = "llama-3.3-70b-versatile"
-    fallback_model: str = "llama-3.1-8b-instant"
+    default_model: str = "llama-3.1-8b-instant"
+    fallback_model: str = "llama-3.3-70b-versatile"
 
     # Embeddings
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
