@@ -1,6 +1,6 @@
 """Pydantic models for API request/response validation."""
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from typing import List, Dict, Optional
 
 
@@ -13,6 +13,18 @@ class SourceDocument(BaseModel):
     score: float
     source: str = ""
     page: Optional[int] = None
+
+    # NO BACKSLASHES HERE! Just normal quotes.
+    @field_validator("page", mode="before")
+    @classmethod
+    def parse_page(cls, v):
+        # Catch empty strings or None and convert to a clean Python None
+        if v is None or v == "":
+            return None
+        try:
+            return int(v)
+        except (ValueError, TypeError):
+            return None
 
 
 class QueryResponse(BaseModel):

@@ -1,0 +1,45 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: documind-qdrant-cont
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+
+  api:
+    build: .
+    container_name: documind-api-cont
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - QDRANT_URL=http://documind-qdrant-cont:6333
+    depends_on:
+      - qdrant
+    command: uvicorn src.api.main:app --host 0.0.0.0 --port 8000
+    volumes:
+      - ./src:/app/src        # ← mirrors your local src/ into container
+      - ./data:/app/data      # ← mirrors your local data/ into container
+
+  ui:
+    build: .
+    container_name: documind-ui-cont
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    environment:
+      - QDRANT_URL=http://documind-qdrant-cont:6333
+      - API_BASE=http://documind-api-cont:8000
+    depends_on:
+      - api
+    command: streamlit run ui/app.py --server.port 8501 --server.address 0.0.0.0
+    volumes:
+      - ./ui:/app/ui          # ← mirrors your local ui/ into container
+      - ./src:/app/src        # ← ui also imports from src
+
+volumes:
+  qdrant_storage:

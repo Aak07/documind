@@ -97,11 +97,19 @@ async def query_documents(request: QueryRequest):
 
         sources = []
         for doc in result.get("documents", []):
+            raw_page = doc["metadata"].get("page")
+            clean_page = None
+            if raw_page:  # This safely ignores None, "", and 0
+                try:
+                    clean_page = int(raw_page)
+                except (ValueError, TypeError):
+                    clean_page = None
+
             sources.append({
                 "text": doc["text"][:200] + "..." if len(doc["text"]) > 200 else doc["text"],
                 "score": doc.get("score", 0.0),
                 "source": doc["metadata"].get("source", ""),
-                "page": doc["metadata"].get("page"),
+                "page": clean_page,
             })
 
         return QueryResponse(

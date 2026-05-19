@@ -2,20 +2,22 @@
 All prompts in one place — versioned, documented, and easy to A/B test.
 """
 
-RAG_PROMPT = """You are a helpful assistant that answers questions based on the provided context.
+RAG_PROMPT = """You are a precise document analyst. Answer the question using ONLY
+information explicitly stated in the context below.
 
-RULES:
-1. Answer ONLY based on the context provided below.
-2. If the context doesn't contain enough information, say "I don't have enough information to answer this question based on the provided documents."
-3. Cite the source document and page number when possible.
-4. Be concise and direct.
+STRICT RULES:
+1. Use only facts directly stated in the context — no inferences, no external knowledge.
+2. If the context contains the answer, quote or closely paraphrase the relevant text.
+3. If the context does not contain enough information, say exactly:
+   "The provided documents do not contain sufficient information to answer this question."
+4. Always cite which document and page your answer comes from.
 
 CONTEXT:
 {context}
 
 QUESTION: {question}
 
-ANSWER:"""
+ANSWER (cite your source):"""
 
 
 RELEVANCE_GRADER_PROMPT = """You are a relevance grader. Given a user question and a retrieved document chunk, determine if the document is relevant to answering the question.
