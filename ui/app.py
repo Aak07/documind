@@ -8,7 +8,7 @@ import tempfile
 import time
 
 # FastAPI backend URL
-API_BASE = "http://127.0.0.1:8000"
+API_BASE = os.getenv("API_BASE", "http://127.0.0.1:8000")
 
 def check_backend() -> bool:
     """Check if FastAPI backend is running."""
